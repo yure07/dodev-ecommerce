@@ -7,6 +7,7 @@
   <li>Mostrar os produtos por ordem de maior avaliação.</li>
   <li>Alterar o preço de um produto.</li>
   <li>Deletar um produto.</li>
+  <li>Adicionar ou deletar um produto ao carrinho</li>
   <li>Encerrar o programa.</li>
 </ul>
 <p>Cada função acima foi feita separadamente uma da outra, e o usuário tem total controle do que deseja fazer.</p>
