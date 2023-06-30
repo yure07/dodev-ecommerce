@@ -2,6 +2,8 @@ let idsProducts = []
 let namesProducts = []
 let priceProducts = []
 let evaluationProducts = []
+let cartProduct
+let cartQuantityProduct = 0
 
 function registerProduct(){
     let quantity = parseInt(prompt('Quantos produtos deseja cadstrar?'))
@@ -11,7 +13,7 @@ function registerProduct(){
         priceProducts[i] = parseInt(prompt(`Diga o preço do ${i+1}º produto`))
         evaluationProducts[i] = parseInt(prompt(`Diga a avaliacao do ${i+1}º produto. De 1 a 5`))
     }
-    let whichFunction = prompt('O que deseja fazer?\nBuscar produto por nome\nBuscar produto por id\nMudar preço de produto\nDeletar Produto\nMostrar produtos ou Encerrar programa\nMostrar por maior avaliação')
+    let whichFunction = prompt('O que deseja fazer?\nBuscar produto por nome\nBuscar produto por id\nMudar preço de produto\nDeletar Produto\nMostrar produtos ou Encerrar programa\nMostrar por maior avaliação\nAdicionar produto ao carrinho')
     switch (whichFunction) {
         case 'Buscar produto por nome':
             let askName = prompt('Diga o nome do produto para buscar seu id')     
@@ -34,6 +36,11 @@ function registerProduct(){
             break;
         case 'Mostrar por maior avaliação':
             showForEvaluation()
+            break;
+        case 'Adicionar produto ao carrinho':
+            const nameToAdd = prompt('Diga o nome do produto que quer adicionar')
+            const quantity = parseInt(prompt(`Diga a quantidade que deseja adicionar de ${nameToAdd}`))
+            console.log(addToCart(nameToAdd, quantity))
             break;
         default:
             alert('Ação Indisponível')
@@ -119,4 +126,26 @@ function deleteProduct(nameProduct){
     for (let j = 0; j < newIds.length; j++) {
         console.log(`id: ${newIds[j]}, ${newNames[j]}, R$ ${newPrices[j]},00 de Nota ${newEvaluations[j]}`)
     }
+}
+
+function addToCart(nameProduct, quantityProduct){
+    if(nameProduct === cartProduct) cartQuantityProduct += quantityProduct
+    else {
+        cartProduct = nameProduct
+        cartQuantityProduct += quantityProduct
+    }
+    console.log(showCart(cartProduct, cartQuantityProduct))
+}
+
+function deleteProductCart(nameProduct, quantityProduct){
+    if(quantityProduct >= cartQuantityProduct) {
+        cartQuantityProduct = 0
+        cartProduct = ''
+    } else cartQuantityProduct -= quantityProduct
+    alert(`${quantityProduct} unidades de ${nameProduct} foi(ram) deletado(s)`)
+}
+
+function showCart(nameProduct, quantityProduct){
+    let message = `Carrinho: ${nameProduct}, com ${quantityProduct} unidades`
+    return message
 }
